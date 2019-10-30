@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,6 +25,7 @@ SECRET_KEY = '5x)r5m^^4rfqyk4l+$+d5om!)&8z3z(3b$(35)jv@-ee3@ov(z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+THUMBNAIL_DEBUG = True
 
 ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1', '65708d12.ngrok.io']
 
@@ -54,6 +56,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'bookmarks.urls'
+
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: reverse_lazy('user_detail', args=[u.username])
+}
 
 TEMPLATES = [
     {
